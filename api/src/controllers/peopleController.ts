@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import { Person } from '../models';
 import { IPeopleRepository } from "../repositories";
 import { AutoWired, Inject, Provides } from 'typescript-ioc';
+import { RabbitMqHelper } from '../queueutils';
 
 @Provides(PeopleController)
 export class PeopleController {
@@ -10,6 +11,9 @@ export class PeopleController {
 
     @Inject
     private peopleRepository!: IPeopleRepository;
+
+    @Inject
+    private rabbitMqHelper!: RabbitMqHelper;
 
     /**
      *
@@ -26,6 +30,7 @@ export class PeopleController {
                 if(items.length == 0) {
                     res.status(204).send();
                 } else {
+                    this.rabbitMqHelper.send(JSON.stringify(items));
                     res.status(200).json(items)
                 }
             })

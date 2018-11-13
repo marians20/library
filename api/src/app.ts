@@ -3,6 +3,7 @@ import { AutoWired, Inject } from "typescript-ioc";
 import * as bodyParser from "body-parser";
 import * as mongoose from "mongoose";
 
+import { RabbitMqHelper } from './queueutils';
 import { config, IocContainerConfig } from "./config";
 import { PeopleController } from './controllers';
 
@@ -12,14 +13,23 @@ export class App{
     @Inject
     private peopleController!: PeopleController;
 
+    @Inject
+    private rabbitMqHelper!: RabbitMqHelper;
+
     /**
      *
      */
     constructor(dbUrl?: string) {
+        this.rabbitMqHelper.startReceiving((message: any) => {
+            console.log(message.getContent());
+        });
+
         this.app = express();
         this.config();
         this.mongoConfig(dbUrl);
         this.routes();
+
+        this.rabbitMqHelper.send(Date.now().toString());
     }
 
     public get ExpressApp(): express.Application {
