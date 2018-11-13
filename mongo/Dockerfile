@@ -1,0 +1,5 @@
+FROM mongo
+LABEL author="Marian Spoiala"
+
+ENV MONGO_INITDB_ROOT_USERNAME=root
+ENV MONGO_INITDB_ROOT_PASSWORD=example

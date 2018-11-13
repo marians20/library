@@ -1,0 +1,32 @@
+version: '3.2'
+
+volumes:
+  mongodb:
+
+services:
+  mongo:
+    build:
+      context: ./mongo
+      dockerfile: Dockerfile
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+
+  rabbitmq:
+    build:
+      context: ./rabbitmq
+      dockerfile: Dockerfile
+    ports:
+      - 5672:5672
+
+  backend:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    environment:
+      - DEV_DB_HOST=mongo
+    depends_on:
+      - mongo
+    ports:
+      - 4040:4040
