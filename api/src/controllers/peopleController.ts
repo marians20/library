@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express';
 import { Person } from '../models';
 import { IPeopleRepository } from "../repositories";
 import { AutoWired, Inject, Provides } from 'typescript-ioc';
-import { RabbitMqHelper } from '../queueutils';
+import { IQueueHelper } from '../queueutils';
 
 @Provides(PeopleController)
 export class PeopleController {
@@ -13,7 +13,7 @@ export class PeopleController {
     private peopleRepository!: IPeopleRepository;
 
     @Inject
-    private rabbitMqHelper!: RabbitMqHelper;
+    private queueHelper!: IQueueHelper;
 
     /**
      *
@@ -30,7 +30,7 @@ export class PeopleController {
                 if(items.length == 0) {
                     res.status(204).send();
                 } else {
-                    this.rabbitMqHelper.send(JSON.stringify(items));
+                    this.queueHelper.send(JSON.stringify(items));
                     res.status(200).json(items)
                 }
             })

@@ -1,15 +1,17 @@
 import * as Amqp from 'amqp-ts';
 import { config } from '../config';
 import { Provides, Singleton } from 'typescript-ioc';
+import { IQueueHelper } from './i-queue-helper';
 
-@Provides(RabbitMqHelper)
+@Provides(IQueueHelper)
 @Singleton
-export class RabbitMqHelper {
+export class RabbitMqHelper implements IQueueHelper {
 
     private url = `amqp://${config.queue.user}:${config.queue.password}@${config.queue.host}/${config.queue.vhost}`;
     private connection: any;
     private exchange: any;
     private queue: any
+    
     /**
      *
      */
