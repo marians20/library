@@ -12,6 +12,9 @@ services:
       - 27017:27017
     volumes:
       - mongodb:/data/db
+    environment:
+      - ENV MONGO_INITDB_ROOT_USERNAME=root
+      - ENV MONGO_INITDB_ROOT_PASSWORD=v3fYS4cChLsX2pUYd8A6F62H
 
   rabbitmq:
     build:
@@ -19,6 +22,10 @@ services:
       dockerfile: Dockerfile
     ports:
       - 5672:5672
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=3eabURK4gqmtZRwzDKTxzBVV
+      - RABBITMQ_DEFAULT_VHOST=rabbitmq
 
   backend:
     build:
@@ -26,7 +33,11 @@ services:
       dockerfile: Dockerfile
     environment:
       - DEV_DB_HOST=mongo
+      - DEV_DB_USER=root
+      - DEV_DB_PASSWORD=v3fYS4cChLsX2pUYd8A6F62H
       - DEV_QUEU_HOST=rabbitmq
+      - DEV_QUEUE_USER=user
+      - DEV_QUEUE_PASSWORD=3eabURK4gqmtZRwzDKTxzBVV
     depends_on:
       - mongo
       - rabbitmq

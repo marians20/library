@@ -3,7 +3,7 @@ FROM node:8
 # Create app directory
 WORKDIR /usr/src/app
 
-ENV PORT 4040
+ENV DEV_APP_PORT 4040
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied

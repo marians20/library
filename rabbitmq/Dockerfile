@@ -1,5 +1,2 @@
 FROM rabbitmq:latest
 LABEL author="Marian Spoiala"
-ENV RABBITMQ_DEFAULT_USER=user
-ENV RABBITMQ_DEFAULT_PASS=password
-ENV RABBITMQ_DEFAULT_VHOST=rabbitmq

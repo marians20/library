@@ -44,11 +44,17 @@ export class App{
     }
 
     private mongoConfig(url?: string): void {
-        const { db: { host, port, name } } = config;
+        const { db: { host, port, name, user, password } } = config;
         const mongoUrl = url || `mongodb://${host}:${port}/${name}`;
-
+        console.log(`mongoUrl: ${mongoUrl}`);
         mongoose.set('useFindAndModify', false);
-        mongoose.connect(mongoUrl, { useNewUrlParser: true })
+        mongoose.connect(mongoUrl, {
+                useNewUrlParser: true,
+                // authMechanism: 'MONGODB-CR',
+                // auth: { authSource: 'admin' },
+                // user: user,
+                // pass: password
+            })
             .then(() => {
                 
             }, (error) => {
