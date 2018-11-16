@@ -39,10 +39,11 @@ export class ApiClient {
     }
 
     public put(url: string, data: object): Observable<object> {
-        this.logger.trace(`PUT ${this.checkUrl(url)}`);
+        const myurl = `${this.checkUrl(url)}${data['_id']}`;
+        this.logger.trace(`PUT ${myurl}`);
         this.logger.trace(data);
         this.logger.trace('===== END PUT data =====');
-        return this.httpClient.put(this.checkUrl(url), data)
+        return this.httpClient.put(myurl, data)
             .pipe(
                 retry(1),
                 catchError(this.handleError)

@@ -1,4 +1,5 @@
 import * as express from 'express';
+import * as cors from 'cors';
 import { AutoWired, Inject } from 'typescript-ioc';
 import * as bodyParser from 'body-parser';
 import * as mongoose from 'mongoose';
@@ -45,11 +46,14 @@ export class App{
     }
 
     private config(): void {
-        this.app.use(function(req, res, next) {
-            res.header("Access-Control-Allow-Origin", "*");
-            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-            next();
-          });
+        // this.app.use(function(req, res, next) {
+        //     res.header("Access-Control-Allow-Origin", "*");
+        //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        //     next();
+        //   });
+
+        this.app.use(cors());
+
         this.app.use( '/swagger' , express.static( 'swagger' ) );
         this.app.use( '/api-docs/swagger/assets' , express.static( 'node_modules/swagger-ui-dist' ) );
         this.app.use( bodyParser.json() );
