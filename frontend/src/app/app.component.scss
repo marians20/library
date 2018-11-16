@@ -1,0 +1,39 @@
+@import 'commons';
+@import 'singleton';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    header {
+        display: flex;
+        flex-flow: row;
+        width: 100%;
+        ccpv-header {
+            width: 100%;
+        }
+    }
+    aside {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        background-color: $side-menu-background;
+        width: $sidemenu-width;
+        transition: width 0.2s;
+    }
+    .hidden {
+        width: 0px;
+    }
+    main {
+        display: flex;
+        flex-flow: row;
+        flex-grow: 1;
+        height: 100%;
+        width: 100%;
+    }
+    .ccpv-container {
+        background-color: $container-background;
+        width: 100%;
+    }
+}

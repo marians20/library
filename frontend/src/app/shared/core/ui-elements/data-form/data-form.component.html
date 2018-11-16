@@ -1,0 +1,30 @@
+<div class='wrapper'>  
+  <ccpv-alert *ngIf="showMessages"></ccpv-alert>
+  <div *ngFor="let column of columns" class="row">
+    <div class='col-4 label'>
+      <label>{{column.label}}</label>
+    </div>
+    <div class="col-8 inputs">
+      <ccpv-data-input  [id]="column.fieldName"
+                        [name]="column.fieldName"
+                        [(value)]="item[column.fieldName]"
+                        [lookupData]="column.lookupData"
+                        [dataType]="column.dataType"
+        [isReadOnly]="!(isEditing || isCreating || isSearch) || column.readOnly">
+      </ccpv-data-input>
+    </div>
+  </div>
+  <div class="row buttons">
+    <div class="col-md-4">
+      <button *ngIf="isEditing || isCreating" class="btn btn-primary" (click)="onClickSave()">
+        <i class="fa fa-floppy-o" aria-hidden="true" id="buttonId"></i>
+      </button>
+      <button *ngIf="isSearch" class="btn btn-primary" (click)="onClickSave()">
+        <i class="fa fa-arrow-right" aria-hidden="true" id="buttonId"></i>
+      </button>
+      <button *ngIf="backRoute" class="btn btn-outline-primary" [routerLink]="backRoute" routerLinkActive="active">
+        <i class="fa fa-arrow-left" aria-hidden="true" id="backBtnId"></i>
+      </button>
+    </div>
+  </div>
+</div>

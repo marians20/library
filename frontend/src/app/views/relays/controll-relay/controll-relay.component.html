@@ -1,0 +1,16 @@
+<div>
+  <label>{{relay.name}}&nbsp;</label>
+  <img *ngIf="+relay.value === 0" class="icon" src="/assets/Images/bulb-off.png"/>
+  <img *ngIf="+relay.value === 1" class="icon" src="/assets/Images/bulb-on.png"/>
+  <div class="btn-group" role="group">
+    <button *ngIf="+relay.value === 0" type="button" (click)="turnOn(relay)" class="btn btn-success btn-lg">
+      <img class="icon" src="/assets/Images/bulb-on.png"/>
+    </button>
+    <button *ngIf="+relay.value === 1" type="button" (click)="turnOff(relay)" class="btn btn-danger btn-lg">
+      <img class="icon" src="/assets/Images/bulb-off.png"/>
+    </button>
+    <button (click)="turnOff(relay)" type="button" class="btn btn-warning btn-lg">
+      <i class="fa fa-cogs" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>

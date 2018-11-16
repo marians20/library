@@ -1,0 +1,32 @@
+@import 'commons';
+@import 'singleton';
+
+:host{
+    display: flex;
+    width: 100%;
+    .row {
+        margin: 0;
+    }
+   
+    .btn {
+        border-radius: 0 !important;
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+        height: 32px;
+        width: 32px;
+        padding: 6px;
+        color: #fafafa;
+    }
+    
+    .inputs {
+        padding: 10px 10px;
+    }
+    
+    .label {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        background-color: $gray-4;
+    }
+}
+

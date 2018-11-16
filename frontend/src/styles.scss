@@ -1,0 +1,81 @@
+/* You can add global styles to this file, and also import other style files */
+@import '../node_modules/bootstrap/dist/css/bootstrap.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import 'styles/commons';
+@import 'styles/singleton';
+
+html, body {
+    height: 100%;
+}
+body{
+    font-family: $font-family-1;
+}
+
+.ccpv-container {
+    display: flex;
+    align-items: right;
+    background-color: $color-assistant-1;
+}
+
+.wrapper {
+    width: 100%;
+}
+.content {
+    padding: 6px;
+    background: $color-assistant-2;
+}
+
+.inputs {
+    padding: 10px 10px;
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: $gray-4;
+}
+
+.buttons {
+    margin-top: 10px;
+    div {
+        padding: 0;
+    }
+}
+
+.full-width {
+    width: 100%;
+}
+
+.mat-dialog-container {
+    padding: 0 !important;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+//Overlay styling
+.cdk-overlay-container{
+    pointer-events: none;
+    z-index: 1;
+    position: relative;
+}
+.cdk-overlay-container, .overlay-backdrop{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.overlay-backdrop{
+    background: rgba(255,255,255,0.75);
+}
+
+.overlay-preloader-pane{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

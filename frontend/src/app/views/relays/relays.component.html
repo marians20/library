@@ -1,0 +1,9 @@
+<div class="wrapper">
+  <ccpv-page-title>
+      <h2>{{title}}</h2>
+  </ccpv-page-title>
+  <ng-container *ngFor="let relay of relays">
+    <ctrl-controll-relay [ngModel]="relay" (ngModelChange)="onRelayChanged($event)">
+    </ctrl-controll-relay>
+  </ng-container>
+</div>

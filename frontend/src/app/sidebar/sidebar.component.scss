@@ -1,0 +1,12 @@
+@import 'commons';
+@import 'singleton';
+
+:host {
+    display: flex;
+    flex: 1 100%;
+    width: 100%;
+    justify-content: space-between;
+    .buttons {
+        margin-left: auto;
+    }
+}

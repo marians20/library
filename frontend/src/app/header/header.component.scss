@@ -1,0 +1,23 @@
+@import 'commons';
+@import 'singleton';
+
+:host {
+    .fa-bars {
+        margin-right: 1em;
+        font-weight: 900;
+    }
+    .login {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    background: #aafa00;
+}
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }

@@ -1,0 +1,17 @@
+div {
+    text-overflow: ellipsis;
+    padding: 2px 0;
+}
+.normal-data, .error-data {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.normal-data {
+    text-decoration: none;
+}
+.error-data {
+    color: #8d0000;
+    font-style: italic;
+}

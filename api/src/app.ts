@@ -1,17 +1,25 @@
-import * as express from "express";
-import { AutoWired, Inject } from "typescript-ioc";
-import * as bodyParser from "body-parser";
-import * as mongoose from "mongoose";
+import * as express from 'express';
+import { AutoWired, Inject } from 'typescript-ioc';
+import * as bodyParser from 'body-parser';
+import * as mongoose from 'mongoose';
+import * as swagger from 'swagger-express-ts';
+import { SwaggerDefinitionConstant } from 'swagger-express-ts';
 
 import { IQueueHelper } from './queueutils';
-import { config, IocContainerConfig } from "./config";
-import { PeopleController } from './controllers';
+import { config, IocContainerConfig } from './config';
+import { PeopleController, CategoriesController, ProducersController, ProductsController } from './controllers';
 
 export class App{
     private app: express.Application;
 
     @Inject
     private peopleController!: PeopleController;
+
+    @Inject categoriesController!: CategoriesController;
+
+    @Inject producersController!: ProducersController;
+
+    @Inject productsController!: ProductsController;
 
     @Inject
     private queueHelper!: IQueueHelper;
@@ -37,6 +45,28 @@ export class App{
     }
 
     private config(): void {
+        this.app.use(function(req, res, next) {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            next();
+          });
+        this.app.use( '/swagger' , express.static( 'swagger' ) );
+        this.app.use( '/api-docs/swagger/assets' , express.static( 'node_modules/swagger-ui-dist' ) );
+        this.app.use( bodyParser.json() );
+        this.app.use( swagger.express(
+            {
+                definition : {
+                    info : {
+                        title : "My api" ,
+                        version : "1.0"
+                    } ,
+                    externalDocs : {
+                        url : "My url"
+                    }
+                    // Models can be defined here
+                }
+            }
+        ) );
         this.app.use(bodyParser.json({ type: 'application/json' }));
         this.app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -65,5 +95,8 @@ export class App{
 
     private routes(): void {
         this.app.use('/api/v1/people', this.peopleController.getRoutes());
+        this.app.use('/api/v1/categories', this.categoriesController.getRoutes());
+        this.app.use('/api/v1/producers', this.producersController.getRoutes());
+        this.app.use('/api/v1/products', this.productsController.getRoutes());
     }
 }

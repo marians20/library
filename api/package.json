@@ -25,6 +25,8 @@
     "express": "^4.16.4",
     "mongoose": "^5.3.11",
     "reflect-metadata": "^0.1.12",
+    "swagger-express-ts": "^1.0.0",
+    "swagger-ui-dist": "^3.19.5",
     "typegoose": "^5.4.1",
     "typescript-ioc": "^1.2.4"
   },

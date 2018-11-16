@@ -1,0 +1,10 @@
+<div class="wrapper">
+  <h5>{{data.title}}</h5>
+  <p>{{data.message}}</p>
+  <div class="row buttons">
+    <div class="col-12">
+      <button class="btn btn-outline-success" [mat-dialog-close]="'true'" cdkFocusInitial>Yes</button>
+      <button class="btn btn-outline-info" (click)="onNoClick()">No</button>
+    </div>
+  </div>
+</div>

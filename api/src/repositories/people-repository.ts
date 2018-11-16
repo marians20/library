@@ -1,4 +1,4 @@
-import { IPeopleRepository } from './i-people-repository';
+import { IPeopleRepository } from './interfaces';
 import { Person } from '../models';
 import { Provides } from 'typescript-ioc';
 
@@ -7,9 +7,6 @@ export class PeopleRepository implements IPeopleRepository {
 
     private ItemModel: any;
 
-    /**
-     *
-     */
     constructor() {
         this.ItemModel = new Person().getModelForClass(Person);
     }

@@ -1,0 +1,236 @@
+<div class="wrapper">
+  <ccpv-alert *ngIf=" showMessages && inlineForms === false"></ccpv-alert>
+  <table [class]="style">
+    <thead>
+      <!-- data-table toolbar -->
+      <tr class='data-table-toolbar'>
+        <td [attr.colspan]="colspan">
+          <div class='pull-left'>
+            {{title}}
+          </div>
+          <div class='form-inline pull-right'>
+            <ng-container *ngIf="allowInlineForms && (allowCreate || allowEdit)">
+              <div class='form-inline'>
+                <label>Inline forms</label>&nbsp;
+                <!-- <input type="checkbox" [(ngModel)]="inlineforms" /> -->
+                 <input type="checkbox"  id="switch" class="fancycheckbox" [(ngModel)]="inlineForms" />
+                <label for="switch"></label>
+                &nbsp;
+              </div>
+            </ng-container>
+            <ccpv-button  *ngIf="apiClient"
+                          id="searchBarSwitchBtn"
+                          type="fa fa-search"
+                          (click)="onClickFilter()">
+            </ccpv-button>            
+            <ccpv-button  *ngIf="allowCreate"
+                          id="createRowBtn"
+                          type="btn-accent fa fa-plus"
+                          (click)="onClickCreate(createForm)">
+            </ccpv-button>
+            <ccpv-button  *ngIf="allowCsvExport"
+                          id="exportCsvBtn"
+                          type="fa fa-file-excel-o"
+                          (click)="ExportAsCsv()">
+            </ccpv-button>            
+          </div>
+        </td>
+      </tr>
+      <!-- END data-table toolbar -->
+
+      <!-- table columns header -->
+      <tr class='data-table-columns-header'>
+        <th></th>
+        <th *ngFor="let column of columns">
+          <ng-container *ngIf="column">
+            <ng-container *ngIf="column.allowSorting; then sortingColumnHeader else normalColumnHeader"></ng-container>
+          </ng-container>
+          <ng-template #sortingColumnHeader>
+            <div class='sortable-header' id='sort_by_{{column.fieldName}}' attr.name='sort_by_{{column.fieldName}}' (click)='setOrderByColumn(column)'>
+              {{column.label}}
+              <span class='sort-symbol pull-right'>
+                <i *ngIf='column.fieldName === orderByColumn && !orderDescending' class="fa fa-sort-asc" aria-hidden="true"></i>
+                <i *ngIf='column.fieldName === orderByColumn && orderDescending' class="fa fa-sort-desc" aria-hidden="true"></i>
+                <i *ngIf='column.fieldName !== orderByColumn'>&nbsp;</i>
+              </span>
+            </div>
+          </ng-template>
+
+          <ng-template #normalColumnHeader>
+            {{column.label}}
+          </ng-template>
+
+        </th>
+        <th *ngIf="allowEdit || allowDelete"></th>
+      </tr>
+      <!-- END table columns header -->
+
+      <!-- filter columns header -->
+      <tr *ngIf="showFilterRow && apiClient">
+        <th>
+          <ccpv-button  id="clearFiltersBtn"
+                    type="fa fa-ban"
+                    (click)="onClickClearFilters()">
+          </ccpv-button>          
+        </th>
+        <th *ngFor="let column of columns">
+          <ccpv-data-input id="filter_{{column.fieldName}}" [(value)]="searchFieldsValues[column.fieldName]" (valueChange)="onFilterChange($event, column.fieldName)"
+            [lookupData]="column.lookupData" [dataType]="column.dataType">
+          </ccpv-data-input>
+        </th>
+        <th *ngIf="allowEdit || allowDelete"></th>
+      </tr>
+      <!-- END filter columns header -->
+
+      <!-- Create new item row -->
+      <tr *ngIf="isCreatingNewItem">
+        <td></td>
+        <td *ngFor="let column of columns" class="td-input">
+          <ccpv-data-input  id="edit_{{column.fieldName}}"
+                            [(value)]="currentItem[column.fieldName]"
+                            [lookupData]="column.lookupData"
+                            [dataType]="column.dataType">
+          </ccpv-data-input>
+        </td>
+        <td>
+          <div class='btn-group-sm'>
+            <ccpv-button  id="save_{{currentItem['id']}}_btn"
+                          type="fa fa-save"
+                          (click)="onClickSave()">
+            </ccpv-button>             
+            <ccpv-button  id="cancel_{{currentItem['id']}}_btn"
+                          type="fa fa-ban"
+                          (click)="onClickCancel()">
+            </ccpv-button>             
+          </div>
+        </td>
+      </tr>
+      <!-- END Create new item row -->
+
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items; index as i; first as isFirst; last as isLast">
+        <td class='row-header'>
+          <ng-container *ngIf="allowSelectRows">
+            <input type="checkbox" class="checkbox" (change)="onSelectClicked($event, item['id'])" />
+          </ng-container>
+        </td>
+        <td *ngFor="let column of columns">
+          <ng-container *ngIf="column">
+            <ng-container *ngIf="isEditingItem !== i; then showItem else editItem"></ng-container>
+
+            <ng-template #showItem>
+              <ccpv-data-view [value]="item[column.fieldName]" [dataType]="column.dataType" [lookupData]="column.lookupData"></ccpv-data-view>
+            </ng-template>
+
+            <ng-template #editItem>
+              <ccpv-data-input [id]="column.fieldName" [(value)]="currentItem[column.fieldName]" [lookupData]="column.lookupData" [dataType]="column.dataType">
+              </ccpv-data-input>
+            </ng-template>
+          </ng-container>
+        </td>
+        <!-- normal row action buttons -->
+        <td *ngIf="isEditingItem !== i && (allowEdit || allowDelete)">
+          <div class='btn-group-sm'>
+            <ccpv-button  *ngIf="allowShowDetails"
+                          id="details_{{item['id']}}_btn"
+                          type="fa fa-eye"
+                          (click)="onClickShowDetails(item)">
+            </ccpv-button>
+            <ccpv-button  *ngIf="allowEdit"
+                          id="edit_{{item['id']}}_btn"
+                          type="fa fa-pencil"
+                          (click)="onClickEdit(editForm, item['id'], i)">
+            </ccpv-button>
+            <ccpv-button  *ngIf="allowDelete"
+                          id="delete_{{item['id']}}_btn"
+                          type="fa fa-trash"
+                          (click)="onClickDelete(item['id'])">
+            </ccpv-button>            
+          </div>
+        </td>
+        <!-- END normal row action buttons -->
+
+        <!-- editing / creating row actions -->
+        <td *ngIf="isEditingItem === i">
+          <div class='btn-group-sm'>
+            <ccpv-button  id="save_{{item['id']}}_btn"
+                          type="fa fa-save"
+                          (click)="onClickSave()">
+            </ccpv-button>            
+
+            <ccpv-button  id="cancel_{{item['id']}}_btn"
+                          type="fa fa-ban"
+                          (click)="onClickCancel()">
+            </ccpv-button>            
+          </div>
+        </td>
+        <!-- END editing / creating row actions -->
+      </tr>
+
+    </tbody>
+    <tfoot>
+      <!-- pagination -->
+      <tr>
+        <td [attr.colspan]="colspan" style="padding: 5px;">
+          <div class="form-inline pull-left">
+            <ngb-pagination [collectionSize]="collectionSize" [pageSize]="pageSize" [(page)]="page" [maxSize]=5 (pageChange)='onPgChanged()'></ngb-pagination>
+          </div>
+          <div class="form-inline pull-right" style="margin-top: 4px;">
+            <div class="form-group">
+              <label>Page size:</label>
+              <input id="dataGridPageSize" type="number" min="1" max="100" [(ngModel)]="pageSize" (ngModelChange)="onPgSizeChanged($event)"
+                class="form-control page-size" />
+              <p style="margin: 0;">Page {{page}}/{{pagesCount}}</p>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <!-- END pagination -->
+    </tfoot>
+  </table>
+</div>
+
+<ng-template #createForm let-c="close">
+  <ccpv-page-title>
+      <h2>Create item</h2>
+      <div class="buttons">
+          <button type="button" class="close" aria-label="Close" (click)="c('createForm closed')" id="createFormCloseBtn">
+              <i aria-hidden="true">&times;</i>
+            </button>         
+      </div>
+    </ccpv-page-title>  
+  <div class="modal-body">
+    <ccpv-data-form #createDataForm
+                    [(item)]="currentItem"
+                    [columns]="columns"
+                    [apiClient]="apiClient"
+                    [isCreating]="true"
+                    (create)="onCreate($event)"
+                    (update)="onUpdate($event)"
+                    (created)="onFormCreated($event)">
+    </ccpv-data-form>
+  </div>
+</ng-template>
+
+<ng-template #editForm let-c="close">
+    <ccpv-page-title>
+      <h2>Edit item</h2>
+      <div class="buttons">
+          <button type="button" class="close" aria-label="Close" (click)="c('editForm closed')" id="editFormCloseBtn">
+              <i aria-hidden="true">&times;</i>
+            </button>         
+      </div>
+    </ccpv-page-title>
+  <div class="modal-body">
+    <ccpv-data-form #editDataForm
+                    [(item)]="currentItem"
+                    [columns]="columns"
+                    [apiClient]="apiClient"
+                    [isEditing]="true"
+                    (create)="onCreate($event)"
+                    (update)="onUpdate($event)"
+                    (updated)="onFormUpdated($event)">
+    </ccpv-data-form>
+  </div>
+</ng-template>

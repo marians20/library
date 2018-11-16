@@ -1,0 +1,24 @@
+<div class="wrapper" (keyup)="onKeyUp($event)">
+  <ccpv-page-title>
+      <h2>{{title}}</h2>
+  </ccpv-page-title>
+  <div class="login-form">
+    <div class="row">
+      <label for="username" class="col-4 col-form-label">User Name</label>
+      <div class="col-8">
+        <input class="form-control" type="text" [(ngModel)]="loginModel.username" id="username">
+      </div>
+    </div>
+    <div class="row">
+      <label for="password" class="col-4 col-form-label">Password</label>
+      <div class="col-8">
+        <input class="form-control" type="password" [(ngModel)]="loginModel.password" id="password">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8 offset-4" style="margin-top: 10px;">
+        <button class="btn btn-primary" (click)="doLogin()" style="width: 100%;">Login</button>
+      </div>
+    </div>
+  </div>
+</div>

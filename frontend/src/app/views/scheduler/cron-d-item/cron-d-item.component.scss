@@ -1,0 +1,64 @@
+@import 'commons';
+@import 'singleton';
+
+:host{
+    display: flex;
+    flex-direction: column;
+    background: color-assistant-5;
+    margin: 2px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    border: 1px solid rgba(0,0,0,0.2);
+    .schedule-times {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .durations {
+        display: flex;
+        flex-direction: row;
+        margin-left: 1em;
+    }
+
+    .custom-content {
+        margin-left: 1em;
+    }
+
+    .error, .error:focus, .error:active {
+        border-color: red !important;
+        box-shadow: 0 0 5px red !important;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: row;
+        margin: 5px;
+    }
+    .element {
+        display: flex;
+        flex-direction: column;
+        label {
+            margin: 0;
+            text-align: center;
+            font-weight: 600;
+        }        
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        margin-left: 1em;
+    }
+
+    .cron-label {
+        font-weight: 600;
+        text-align: center;
+    }
+    .cron-input-2 {
+        width: 1.5em;
+    }
+
+    .cron-input-4 {
+        width: 2.5em;
+    }
+}

@@ -1,0 +1,13 @@
+@import 'commons';
+@import 'singleton';
+
+:host {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+    background-color: $page-title-background;
+    padding: 6px;
+    color: $page-title-color;
+}

@@ -1,0 +1,12 @@
+<header>
+  <ccpv-header></ccpv-header>
+</header>
+<main>
+  <aside [ngClass]="{'hidden': !isSidebarVisible}">
+    <ccpv-sidebar title=""></ccpv-sidebar>
+  </aside>
+  <div class="ccpv-container">
+    <router-outlet></router-outlet>
+  </div>
+</main>
+<ccpv-spinner-overlay *ngIf="isSpinnerVisible"></ccpv-spinner-overlay>

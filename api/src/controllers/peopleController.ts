@@ -3,8 +3,14 @@ import { Person } from '../models';
 import { IPeopleRepository } from "../repositories";
 import { AutoWired, Inject, Provides } from 'typescript-ioc';
 import { IQueueHelper } from '../queueutils';
+import { ApiPath, ApiOperationGet, SwaggerDefinitionConstant, ApiOperationPost } from 'swagger-express-ts';
 
 @Provides(PeopleController)
+@ApiPath({
+    path: "/people",
+    name: "People",
+    security: { basicAuth: [] }
+})
 export class PeopleController {
     private router: Router;
     private model: any;
@@ -15,15 +21,21 @@ export class PeopleController {
     @Inject
     private queueHelper!: IQueueHelper;
 
-    /**
-     *
-     */
     constructor() {
         this.router = Router();
         this.model = new Person().getModelForClass(Person);
         this.init();
     }
-
+    @ApiOperationGet({
+        description: "Get person objects list",
+        summary: "Get person list",
+        responses: {
+            200: { description: "Success", type: SwaggerDefinitionConstant.Response.Type.ARRAY, model: "Person" }
+        },
+        security: {
+            apiKeyHeader: []
+        }
+    })
     public getAll(req: Request, res: Response): void {
         this.peopleRepository.getAll()
             .then((items: any) => {
@@ -43,6 +55,17 @@ export class PeopleController {
             .catch(() => res.status(404).send());
     }
 
+    @ApiOperationPost({
+        description: "Post Person object",
+        summary: "Post new person",
+        parameters: {
+            body: { description: "New person", required: true, model: "Person" }
+        },
+        responses: {
+            200: { description: "Success" },
+            400: { description: "Parameters fail" }
+        }
+    })
     public add(req: Request, res: Response): void {
         const newAirport = new this.model(req.body);
 

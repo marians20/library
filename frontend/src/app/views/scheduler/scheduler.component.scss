@@ -1,0 +1,9 @@
+@import 'commons';
+@import 'singleton';
+
+:host{
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    width: 100%;
+}

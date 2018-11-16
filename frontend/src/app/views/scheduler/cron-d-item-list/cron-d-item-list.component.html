@@ -1,0 +1,19 @@
+<div>
+  <button class="btn btn-success" (click)="addItem()">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+  </button>
+  <button class="btn btn-danger" (click)="saveItem()">
+    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+  </button>
+  
+</div>
+<div class="items-container">
+  <ng-container *ngFor="let item of value; let i = index">
+    <ctrl-cron-d-item [(ngModel)]="value[i]"
+                      [disabled]="disabled"
+                      (cancel)="removeItem($event)"
+                      (ngModelChange)="itemChanged($event)">
+      Bubu!
+    </ctrl-cron-d-item>
+  </ng-container>
+</div>

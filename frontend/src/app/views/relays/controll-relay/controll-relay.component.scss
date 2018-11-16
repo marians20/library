@@ -1,0 +1,22 @@
+@import 'commons';
+@import 'singleton';
+
+:host{
+    display: flex;
+    padding: 0px;
+    margin: 3px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background: $color-assistant-6;
+    color: $color-accent-6;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+    label {
+        width: 200px;
+        text-align: right;
+        font-weight: 700;
+    }
+    .icon {
+        max-width: 1em;
+        max-height: 1em;
+    }
+}

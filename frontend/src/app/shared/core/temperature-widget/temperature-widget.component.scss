@@ -1,0 +1,30 @@
+@import 'commons';
+@import 'singleton';
+:host {
+    font-family: 'lcd-plain';
+    font-weight: 900;
+    font-size: larger;
+    background: $lcd-background;
+    color: $lcd-text-color;
+    padding: 0 3px 0 3px;
+    border-radius: 5px;
+    cursor: pointer;
+    .fa-clock-o {
+        color: $lcd-icons-color;
+    }
+    .fa-thermometer-empty {
+        color: #0000ff;
+    }
+    .fa-thermometer-quarter {
+        color: #007074;
+    }
+    .fa-thermometer-half {
+        color: #2c5a00;
+    }
+    .fa-thermometer-three-quarters {
+        color: #6b5b00;
+    }
+    .fa-thermometer-full {
+        color: #630000;
+    }            
+}

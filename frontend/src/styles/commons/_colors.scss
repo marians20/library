@@ -1,0 +1,106 @@
+//Styleguide colors
+//* Theme General Colors *//
+
+//* Theme Assistant Colors *//
+// These colors represent a gradient from white to black with a small influence of blue on the middle colors *//
+
+$color-assistant-0: #ffffff; // - white
+$color-assistant-1: #fafbfc;
+$color-assistant-2: #f5f7fa;
+$color-assistant-2b: #f1f5fa;
+$color-assistant-3: #eef3f7;
+$color-assistant-4: #e2ecf3;
+$color-assistant-4b: #d5dfec;
+$color-assistant-5: #cfdce6;
+$color-assistant-5b: #c7d5e8;
+$color-assistant-6: #b8c5d1;
+$color-assistant-6b: #a8b1bb;
+$color-assistant-7: #9dabba;
+$color-assistant-8: #7c8ca1;
+$color-assistant-8b: #6a728c;
+$color-assistant-9: #445873;
+$color-assistant-10: #000000; // - black
+//* Theme Accent Colors *//
+//* Accent colors can be used to distinguish or decorate elements. They are a vivid contribution to the overall UI and should be used sparingly! *//
+
+$color-accent-0: #005ea8; // - blue
+$color-accent-1: #5ec5ed; // - lightblue
+$color-accent-2: #f89406; // - orange
+$color-accent-3: #ff3749; // - red
+$color-accent-4: #ffed00; // - yellow
+$color-accent-5: #80197f; // - dark magenta
+$color-accent-6: #008185; // - green turquoise
+$color-accent-7: #60ae05; // - mediumgreen
+$color-accent-8: #fd3232; // 
+$color-accent-9: #ff0000; // - validation input text and icon
+
+$color-accent-10: #a32e28; // - alert button border color
+$color-accent-11: #bc6f03; // - warning button border color
+
+$color-accent-0-half: #7faed3; // - blue
+$color-accent-1-half: #aee2f6; // - lightblue
+$color-accent-2-half: #f6bf7f; // - orange
+$color-accent-3-half: #f17fa2; // - red
+$color-accent-4-half: #fff67f; // - yellow
+$color-accent-5-half: #c08cbf; // - dark magenta
+$color-accent-6-half: #7fc0c2; // - green turquoise
+
+$color-accent-assistant-1: #95c7ee;
+$color-accent-assistant-2: #eaa4ba;
+$color-accent-assistant-3: #b99cef;
+$color-accent-assistant-4: #f6bf7f;
+$color-accent-assistant-5: #6ace9e;
+$color-accent-assistant-6: #f5aea4;
+$color-accent-assistant-7: #85ccce;
+$color-accent-assistant-8: #c5de50;
+$color-accent-assistant-9: #d69ff2;
+$color-accent-assistant-10: #5ec5ed;
+$color-accent-assistant-11: #ce9acd;
+$color-accent-assistant-12: #d5cd45;
+
+$color-new-widget-1: #1f76c0;
+$color-new-widget-2: #1facc0;
+$color-new-widget-3: #1fc09e;
+$color-new-widget-4: #1fc069;
+$color-new-widget-5: #1fc034;
+$color-new-widget-6: #3fc01f;
+
+$white: #ffffff;
+$black: #000000;
+
+$gray-1: #f8fcfc;
+$gray-2: #f3f8f9;
+$gray-3: #edf3f6;
+$gray-4: #d2dded;
+$gray-5: #d1dcea;
+$gray-6: #bcc6d4;
+$gray-7: #b2c0cc;
+$gray-8: #97a4b3;
+
+$blue-1: #89abc0;
+$blue-2: #8299a6;
+$blue-3: #6b83a4;
+$blue-4: #62748c;
+$blue-5: #566b88;
+$blue-6: #3b4e68;
+$light-blue: #7c8ca1;
+$dark-blue: #495276;
+$table-border-color: #cddbee;
+
+//Theming
+$theme-color-1: #75c01f;
+$theme-color-2: #d6faac;
+$theme-color-3: #00963f;
+$theme-color-4: #00984a;
+
+
+//Custom colors
+$login-background-color: $color-assistant-7;
+$side-menu-background: $color-assistant-7;
+$container-background: $color-assistant-2;
+$page-title-background: $color-assistant-7;
+$page-title-color: $color-accent-0;
+
+$lcd-background: transparent;
+$lcd-text-color: #363636;
+$lcd-icons-color: #037294;

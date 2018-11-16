@@ -1,0 +1,71 @@
+<ng-container [ngSwitch]="dataType">
+  <ng-container *ngSwitchCase="FieldTypes.String"><ng-container *ngTemplateOutlet='editString'></ng-container></ng-container>
+  <ng-container *ngSwitchCase="FieldTypes.Number"><ng-container *ngTemplateOutlet='editNumber'></ng-container></ng-container>
+  <ng-container *ngSwitchCase="FieldTypes.Boolean"><ng-container *ngTemplateOutlet='editBoolean'></ng-container></ng-container>
+  <ng-container *ngSwitchCase="FieldTypes.Array"><ng-container *ngTemplateOutlet='editArray'></ng-container></ng-container>
+  <ng-container *ngSwitchCase="FieldTypes.Date"><ng-container *ngTemplateOutlet='editDate'></ng-container></ng-container>
+  <ng-container *ngSwitchCase="FieldTypes.Picture"><ng-container *ngTemplateOutlet='editPicture'></ng-container></ng-container>
+  <ng-container *ngSwitchDefault>Unknown data type: {{dataType}}</ng-container>
+</ng-container>
+
+<ng-template #editString>
+  <input type="text" [id]="id" 
+                     [name]="name"
+                     [(ngModel)]="value"
+                     [readonly]="isReadOnly"
+                     (ngModelChange)="valueChanged($event)"
+                     class="form-control" />
+</ng-template>
+
+<ng-template #editBoolean>
+  <input type="checkbox" [id]="id"
+                         [name]="name"
+                         [(ngModel)]="value"
+                         [readonly]="isReadOnly"
+                         (ngModelChange)="valueChanged($event)"
+                         class="checkbox"/>
+</ng-template>
+
+<ng-template #editNumber>
+  <input type="number" [id]="id"
+                       [name]="name"
+                       [(ngModel)]="value"
+                       [readonly]="isReadOnly"
+                       (ngModelChange)="valueChanged($event)"
+                       class="form-control" />
+</ng-template>
+
+<ng-template #editArray>
+  <select [id]="id"
+          [name]="name"
+          [(ngModel)]="value"
+          [disabled]="isReadOnly"
+          (ngModelChange)="valueChanged($event)"
+          class="form-control">
+    <option *ngFor="let option of lookupData.items"
+            [ngValue]="option[lookupData.keyField]">
+      {{option[lookupData.displayField]}}
+    </option>
+  </select>
+</ng-template>
+
+<ng-template #editDate>
+    <form class="form-inline">
+        <div class="form-group" style="width: 100%;">
+          <div class="input-group" style="width: 100%;">
+            <input class="form-control" placeholder="yyyy-mm-dd"
+                                        (ngModelChange)="valueChanged($event)"
+                                        name="dp"
+                                        [(ngModel)]="value"
+                                        ngbDatepicker #d="ngbDatepicker">
+            <button class="button button-default input-group-addon" (click)="d.toggle()" type="button">
+              <i class="fa fa-calendar"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+</ng-template>
+
+<ng-template #editPicture>
+  <img [id]="id" [name]="name" src="value" alt="value" class="data-input-img">
+</ng-template>

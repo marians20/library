@@ -1,0 +1,109 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="form">
+  <div class="schedule-times">
+    <div class="element">
+      <label>S</label>
+      <input type="text" formControlName="Second"
+                [ngClass]="{
+                  'cron-input-2': true,
+                  'error': formGroup.get('Second').errors !== null
+                }"
+                [readonly]="disabled">
+    </div>
+    <div class="element">
+      <label>m</label>
+      <input type="text" formControlName="Minute"
+                [ngClass]="{
+                  'cron-input-2': true,
+                  'error': formGroup.get('Minute').errors !== null
+                }"
+                [readonly]="disabled">
+    </div>
+    <div class="element">
+      <label>H</label>
+      <input type="text" formControlName="Hour"
+                [ngClass]="{
+                  'cron-input-2': true,
+                  'error': formGroup.get('Hour').errors !== null
+                }"
+                [readonly]="disabled">
+    </div>
+    <div class="element">
+      <label>Wd</label>
+      <input type="text" formControlName="WeekDay"
+            [ngClass]="{
+              'cron-input-2': true,
+              'error': formGroup.get('WeekDay').errors !== null
+            }"
+            [readonly]="disabled">
+    </div>
+    <div class="element">
+      <label>Md</label>
+      <input type="text"formControlName="MonthDay"
+                [ngClass]="{
+                  'cron-input-2': true,
+                  'error': formGroup.get('MonthDay').errors !== null
+                }"
+                [readonly]="disabled">
+    </div>
+    <div class="element">
+      <label>M</label>
+      <input type="text"formControlName="Month"
+                [ngClass]="{
+                  'cron-input-2': true,
+                  'error': formGroup.get('Month').errors !== null
+                }"
+                [readonly]="disabled">
+    </div>
+    <div class="element">
+      <label>Y</label>
+      <input type="text" formControlName="Year"
+                [ngClass]="{
+                  'cron-input-4': true,
+                  'error': formGroup.get('Year').errors !== null
+                }"
+                [readonly]="disabled">
+    </div>
+  </div>
+
+  <div class="durations">
+    <div class="element">
+      <label>Ds</label>
+      <input type="text" formControlName="DurationSeconds"
+                [ngClass]="{
+                  'cron-input-2': true,
+                  'error': formGroup.get('DurationSeconds').errors !== null
+                }"
+                [readonly]="disabled">
+    </div>  
+    <div class="element">
+      <label>Dm</label>
+      <input type="text" formControlName="DurationMinutes"
+                [ngClass]="{
+                  'cron-input-2': true,
+                  'error': formGroup.get('DurationMinutes').errors !== null
+                }"
+                [readonly]="disabled">
+    </div>
+    <div class="element">
+      <label>Dh</label>
+      <input type="text" formControlName="DurationHours"
+                [ngClass]="{
+                  'cron-input-2': true,
+                  'error': formGroup.get('DurationHours').errors !== null
+                }"
+                [readonly]="disabled">
+    </div>
+    </div>
+
+  <div class="custom-content">
+  <ng-content></ng-content>
+  </div>
+  <div class="buttons">
+    <button type="submit" class="btn btn-sm btn-success" [disabled]="disabled || !formGroup.valid">
+      <span class="fa fa-check"></span>
+    </button>
+    <button class="btn btn-sm btn-default" (click)="reset()" [disabled]="disabled">
+      <span class="fa fa-ban"></span>
+    </button>
+  </div>
+</form>

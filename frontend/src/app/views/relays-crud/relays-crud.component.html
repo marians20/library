@@ -1,0 +1,21 @@
+<div class="wrapper">
+  <ccpv-page-title>
+      <h2>{{title}}</h2>
+  </ccpv-page-title>
+  <div class="content">
+    <ccpv-data-table  [columns]="columns"
+                      [inlineForms]="false"
+                      [title]="title"
+                      [allowEdit]="true"
+                      [allowDelete]="true"
+                      [allowCreate]="true"
+                      [items]="relays"
+                      [useOwnForm]="true"
+                      (create)="onCreate($event)"
+                      (createNewItem)="onCreate($event)"
+                      (update)="onEdit($event)"
+                      (delete)="onDelete($event)"
+                      (showDetails)="showDetails($event)">
+    </ccpv-data-table>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+@import 'commons/colors';
+:host{
+    ::ngDeep .container {
+        width: 100%;
+        background-color: $color-assistant-7;
+    }
+}
+.modal-dialog {
+    max-width: 90% !important;
+}
+
+input:focus, select:focus, button:focus, a:focus {
+    box-shadow: none !important;
+}

@@ -1,0 +1,8 @@
+<ng-container [ngSwitch]="dataType">
+  <ng-container *ngSwitchCase="FieldTypes.Picture"><ng-container *ngTemplateOutlet='showPicture'></ng-container></ng-container>
+  <ng-container *ngSwitchDefault><div  [ngClass]="(lookupError) ? 'error-data' : 'normal-data'">{{displayValue}}</div></ng-container>
+</ng-container>
+
+<ng-template #showPicture>
+  <img src="value" alt="value" class="data-input-img">
+</ng-template>

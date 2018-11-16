@@ -1,0 +1,16 @@
+<div class="wrapper">
+  <ccpv-page-title>
+      <h2>{{title}}</h2>
+  </ccpv-page-title>
+  <div class="content">
+    <ccpv-data-input [(ngModel)]="data.relayId"
+                    [lookupData]="relaysLookupData"
+                    [dataType]="FieldTypes.Array"
+                    (ngModelChange)="relayChanged()">
+    </ccpv-data-input>
+    <ctrl-cron-d-item-list [(ngModel)]="data.schedules"
+                          (ngModelChange)="scheduleChanged()"
+                          (save)="save()">
+    </ctrl-cron-d-item-list>
+  </div>
+</div>
