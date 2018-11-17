@@ -9,6 +9,9 @@ import { LoginComponent } from './login/login.component';
 import { SchedulerComponent } from './scheduler/scheduler.component';
 import { RelaysCrudComponent } from './relays-crud/relays-crud.component';
 import { PeopleComponent } from './people/people.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { ProducersComponent } from './producers/producers.component';
+import { ProductsComponent } from './products/products.component';
 
 export const viewsRoutes: CustomRoutes = [
   {
@@ -26,6 +29,24 @@ export const viewsRoutes: CustomRoutes = [
     name: 'People',
     path: 'people',
     component: PeopleComponent,
+    // canActivate: [AuthService]
+  },
+  {
+    name: 'Categories',
+    path: 'categories',
+    component: CategoriesComponent,
+    // canActivate: [AuthService]
+  },
+  {
+    name: 'Producers',
+    path: 'producers',
+    component: ProducersComponent,
+    // canActivate: [AuthService]
+  },
+  {
+    name: 'Products',
+    path: 'products',
+    component: ProductsComponent,
     // canActivate: [AuthService]
   },
   {

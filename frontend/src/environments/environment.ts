@@ -7,7 +7,8 @@ import { LogLevels } from '../app/shared/services';
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:4040',
-  logLevel: LogLevels.Trace
+  logLevel: LogLevels.Trace,
+  primaryKeyField: '_id'
 };
 
 /*

@@ -3,7 +3,8 @@
       <h2>{{title}}</h2>
   </ccpv-page-title>
   <div class="content">
-    <ccpv-data-table  [columns]="columns"
+    <ccpv-data-table  #grid
+                      [columns]="columns"
                       [inlineForms]="false"
                       [title]="title"
                       [allowEdit]="true"

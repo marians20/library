@@ -14,6 +14,9 @@ import { MaterialModule } from '../shared/core/core.material.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SpinnerOverlayComponent } from '../shared/core/ui-elements/spinner-overlay/spinner-overlay.component';
 import { PeopleComponent } from './people/people.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { ProducersComponent } from './producers/producers.component';
+import { ProductsComponent } from './products/products.component';
 
 const moduleComponents = [
   DashboardComponent,
@@ -25,6 +28,9 @@ const moduleComponents = [
   CronDItemListComponent,
   RelaysCrudComponent,
   PeopleComponent,
+  CategoriesComponent,
+  ProducersComponent,
+  ProductsComponent,
 ];
 
 @NgModule({
