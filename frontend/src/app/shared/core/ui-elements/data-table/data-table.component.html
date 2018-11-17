@@ -94,11 +94,11 @@
         </td>
         <td>
           <div class='btn-group-sm'>
-            <ccpv-button  id="save_{{currentItem['id']}}_btn"
+            <ccpv-button  id="save_{{currentItem[primaryKeyFieldName]}}_btn"
                           type="fa fa-save"
                           (click)="onClickSave()">
             </ccpv-button>             
-            <ccpv-button  id="cancel_{{currentItem['id']}}_btn"
+            <ccpv-button  id="cancel_{{currentItem[primaryKeyFieldName]}}_btn"
                           type="fa fa-ban"
                           (click)="onClickCancel()">
             </ccpv-button>             
@@ -112,7 +112,7 @@
       <tr *ngFor="let item of items; index as i; first as isFirst; last as isLast">
         <td class='row-header'>
           <ng-container *ngIf="allowSelectRows">
-            <input type="checkbox" class="checkbox" (change)="onSelectClicked($event, item['id'])" />
+            <input type="checkbox" class="checkbox" (change)="onSelectClicked($event, item[primaryKeyFieldName])" />
           </ng-container>
         </td>
         <td *ngFor="let column of columns">
@@ -133,19 +133,19 @@
         <td *ngIf="isEditingItem !== i && (allowEdit || allowDelete)">
           <div class='btn-group-sm'>
             <ccpv-button  *ngIf="allowShowDetails"
-                          id="details_{{item['id']}}_btn"
+                          id="details_{{item[primaryKeyFieldName]}}_btn"
                           type="fa fa-eye"
                           (click)="onClickShowDetails(item)">
             </ccpv-button>
             <ccpv-button  *ngIf="allowEdit"
-                          id="edit_{{item['id']}}_btn"
+                          id="edit_{{item[primaryKeyFieldName]}}_btn"
                           type="fa fa-pencil"
-                          (click)="onClickEdit(editForm, item['id'], i)">
+                          (click)="onClickEdit(editForm, item[primaryKeyFieldName], i)">
             </ccpv-button>
             <ccpv-button  *ngIf="allowDelete"
-                          id="delete_{{item['id']}}_btn"
+                          id="delete_{{item[primaryKeyFieldName]}}_btn"
                           type="fa fa-trash"
-                          (click)="onClickDelete(item['id'])">
+                          (click)="onClickDelete(item[primaryKeyFieldName])">
             </ccpv-button>            
           </div>
         </td>
@@ -154,12 +154,12 @@
         <!-- editing / creating row actions -->
         <td *ngIf="isEditingItem === i">
           <div class='btn-group-sm'>
-            <ccpv-button  id="save_{{item['id']}}_btn"
+            <ccpv-button  id="save_{{item[primaryKeyFieldName]}}_btn"
                           type="fa fa-save"
                           (click)="onClickSave()">
             </ccpv-button>            
 
-            <ccpv-button  id="cancel_{{item['id']}}_btn"
+            <ccpv-button  id="cancel_{{item[primaryKeyFieldName]}}_btn"
                           type="fa fa-ban"
                           (click)="onClickCancel()">
             </ccpv-button>            

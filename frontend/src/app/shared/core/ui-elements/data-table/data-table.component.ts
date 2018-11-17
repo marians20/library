@@ -47,7 +47,7 @@ export class DataTableComponent implements OnInit, AfterViewInit {
     public get pagesCount(): number {
         return Math.ceil(this.collectionSize / this.pageSize);
     }
-
+    @Input() primaryKeyFieldName: string = 'id';
     @Input() useOwnForm: boolean = true;
     @Input() allowInlineForms: boolean = false;
     @Input() showFilterRow: boolean = false;
@@ -100,7 +100,7 @@ export class DataTableComponent implements OnInit, AfterViewInit {
 
     @Input('orderByColumn')
     set orderByColumn(value: string) {
-        this.getListModel.sortItems[0].fieldName = value || 'Id';
+        this.getListModel.sortItems[0].fieldName = value || this.primaryKeyFieldName;
     }
     get orderByColumn(): string {
         return this.getListModel.sortItems[0].fieldName;
@@ -167,7 +167,7 @@ export class DataTableComponent implements OnInit, AfterViewInit {
             filterItems: [],
             sortItems: []
         };
-        this.getListModel.sortItems.push({ fieldName: 'Id', descending: false });
+        this.getListModel.sortItems.push({ fieldName: this.primaryKeyFieldName, descending: false });
     }
 
     ngOnInit() {
@@ -203,7 +203,8 @@ export class DataTableComponent implements OnInit, AfterViewInit {
 
     getColumnsFromModel(item: object) {
         this.columns = new Array<DataColumn>();
-        const fields = Object.getOwnPropertyNames(item).filter(i => i.toLowerCase() !== 'id');
+        const fields = Object.getOwnPropertyNames(item)
+            .filter(i => i.toLowerCase() !== this.primaryKeyFieldName.toLowerCase());
         fields.forEach(field => {
             const words = field.match(/[A-Z]+[^A-Z]*|[^A-Z]+/g);
             const title = words.map((word) => {
@@ -273,7 +274,7 @@ export class DataTableComponent implements OnInit, AfterViewInit {
 
     onClickEdit(template, id: string, rowIndex: number) {
         rowIndex = rowIndex || 0;
-        this.currentItem = this.items.filter(item => item['id'] === id)[0];
+        this.currentItem = this.items.filter(item => item[this.primaryKeyFieldName] === id)[0];
         this.edit.emit(id);
         if (!this.useOwnForm) {
             return;
@@ -297,9 +298,10 @@ export class DataTableComponent implements OnInit, AfterViewInit {
         }
 
         if (this.apiClient) {
-            if (!confirm('Are you sure ?')) {
+            if (!confirm('Are you sure you want to delete the item?')) {
                 return;
             }
+
             this.apiClient.delete(`${this.apiClient.apiUrl}/${id}`)
                 .subscribe((response) => {
                     this.getAll();

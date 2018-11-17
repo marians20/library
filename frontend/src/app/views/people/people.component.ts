@@ -122,6 +122,10 @@ export class PeopleComponent implements OnInit {
 
   public onDelete(id) {
     const item = this.items.find(x => x._id === id);
+    if (item === undefined) {
+      return;
+    }
+
     if (!confirm(`Are you sure you want to delete ${item.firstName} ${item.lastName}?`)) {
       return;
     }
