@@ -73,7 +73,7 @@ export class ProductsComponent extends ComponentBase<Product> implements OnInit 
 
   public onCreate(data: any) {
     if (data === null || data === undefined) {
-        return;
+      return;
     }
 
     const modal = data.modal;
@@ -86,6 +86,36 @@ export class ProductsComponent extends ComponentBase<Product> implements OnInit 
 
     this.spinnerService.show();
     this.api.post(this.apiUrl, value)
+      .subscribe((response) => {
+        this.getData();
+        if (modal !== undefined) {
+          modal.close();
+        }
+      },
+        (error) => {
+          this.spinnerService.hide();
+        },
+        () => {
+          this.spinnerService.hide();
+        });
+  }
+
+  public onEdit(data: any) {
+    if (data === null || data === undefined) {
+        return;
+    }
+    console.log(data);
+    const modal = data.modal;
+    const value: Product = {
+      _id: data.value._id,
+      name: data.value.name,
+      description: data.value.description,
+      category: this.categoriesLookupData.items.find(x => x[this.primaryKeyField] === data.value.category) as Category,
+      producer: this.producersLookupData.items.find(x => x[this.primaryKeyField] === data.value.producer) as Producer
+    };
+
+    this.spinnerService.show();
+    this.api.put(`${this.apiUrl}`, value)
         .subscribe((response) => {
             this.getData();
             if (modal !== undefined) {
@@ -103,40 +133,40 @@ export class ProductsComponent extends ComponentBase<Product> implements OnInit 
   private getProducersLookupData() {
     this.spinnerService.show();
     this.api.get(`${environment.apiUrl}/api/v1/producers`)
-    .subscribe((result: object[]) => {
-      if (result === null || result === undefined) {
-        return;
-      }
-      this.producersLookupData.items = result;
-      this.grid.matchLookups();
-      console.log(this.producersLookupData.items);
-    },
-    (error) => {
-      this.spinnerService.hide();
-      console.error(error);
-    },
-    () => {
-      this.spinnerService.hide();
-    });
+      .subscribe((result: object[]) => {
+        if (result === null || result === undefined) {
+          return;
+        }
+        this.producersLookupData.items = result;
+        this.grid.matchLookups();
+        console.log(this.producersLookupData.items);
+      },
+        (error) => {
+          this.spinnerService.hide();
+          console.error(error);
+        },
+        () => {
+          this.spinnerService.hide();
+        });
   }
 
   private getCategoriesLookupData() {
     this.spinnerService.show();
     this.api.get(`${environment.apiUrl}/api/v1/categories`)
-    .subscribe((result: object[]) => {
-      if (result === null || result === undefined) {
-        return;
-      }
-      this.categoriesLookupData.items = result;
-      this.grid.matchLookups();
-      console.log(this.categoriesLookupData.items);
-    },
-    (error) => {
-      this.spinnerService.hide();
-      console.error(error);
-    },
-    () => {
-      this.spinnerService.hide();
-    });
+      .subscribe((result: object[]) => {
+        if (result === null || result === undefined) {
+          return;
+        }
+        this.categoriesLookupData.items = result;
+        this.grid.matchLookups();
+        console.log(this.categoriesLookupData.items);
+      },
+        (error) => {
+          this.spinnerService.hide();
+          console.error(error);
+        },
+        () => {
+          this.spinnerService.hide();
+        });
   }
 }

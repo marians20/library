@@ -32,6 +32,8 @@ export class DataInputComponent implements OnInit, ControlValueAccessor {
     }
 
     get value(): any {
+        console.log(typeof(this._value));
+        console.log(this._value);
         return this._value;
     }
 

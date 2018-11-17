@@ -57,7 +57,9 @@ export class DataViewComponent implements OnInit {
     }
 
     public matchLookupData() {
-        if (this.dataType === FieldTypes.Array) {
+        if (typeof(this.value) === 'object') {
+            this.displayValue = this.value[this.lookupData.displayField];
+        } else if (this.dataType === FieldTypes.Array) {
             this.lookupError = false;
             try {
                 this.displayValue = this.lookupData.items
