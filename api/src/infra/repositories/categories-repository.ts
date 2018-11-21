@@ -1,5 +1,5 @@
 import { ICategoriesRepository } from './interfaces';
-import { Category } from '../models';
+import { Category } from '../../domain/models';
 import { Provides } from 'typescript-ioc';
 
 @Provides(ICategoriesRepository)

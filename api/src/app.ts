@@ -1,14 +1,15 @@
 import * as express from 'express';
 import * as cors from 'cors';
+import * as jwt from 'express-jwt';
 import { AutoWired, Inject } from 'typescript-ioc';
 import * as bodyParser from 'body-parser';
 import * as mongoose from 'mongoose';
 import * as swagger from 'swagger-express-ts';
 import { SwaggerDefinitionConstant } from 'swagger-express-ts';
 
-import { IQueueHelper } from './queueutils';
 import { config, IocContainerConfig } from './config';
 import { PeopleController, CategoriesController, ProducersController, ProductsController } from './controllers';
+import { IQueueHelper } from './infra/queueutils';
 
 export class App{
     private app: express.Application;
@@ -25,9 +26,6 @@ export class App{
     @Inject
     private queueHelper!: IQueueHelper;
 
-    /**
-     *
-     */
     constructor(dbUrl?: string) {
         this.queueHelper.startReceiving((message: any) => {
             console.log(message.getContent());
@@ -46,14 +44,13 @@ export class App{
     }
 
     private config(): void {
-        // this.app.use(function(req, res, next) {
-        //     res.header("Access-Control-Allow-Origin", "*");
-        //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        //     next();
-        //   });
-
         this.app.use(cors());
-
+        this.useAuthentication();
+        this.app.use((err: any, req: any, res: any, next: any) => {
+            if (err.name === 'UnauthorizedError') {
+              res.status(401).send('invalid token...');
+            }
+          });
         this.app.use( '/swagger' , express.static( 'swagger' ) );
         this.app.use( '/api-docs/swagger/assets' , express.static( 'node_modules/swagger-ui-dist' ) );
         this.app.use( bodyParser.json() );
@@ -75,6 +72,14 @@ export class App{
         this.app.use(bodyParser.urlencoded({ extended: false }));
 
         IocContainerConfig.configure();
+    }
+
+    private useAuthentication() {
+        if(config.app.use_authentication !== true) {
+            return;
+        }
+
+        this.app.use(jwt({ secret: config.app.secret}));
     }
 
     private mongoConfig(url?: string): void {

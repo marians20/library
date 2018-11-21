@@ -8,8 +8,8 @@ services:
     build:
       context: ./mongo
       dockerfile: Dockerfile
-    # ports:
-    #   - 27017:27017
+    ports:
+      - 27017:27017
     volumes:
       - mongodb:/data/db
     environment:
@@ -20,8 +20,8 @@ services:
     build:
       context: ./rabbitmq
       dockerfile: Dockerfile
-    # ports:
-    #   - 5672:5672
+    ports:
+      - 5672:5672
     environment:
       - RABBITMQ_DEFAULT_USER=user
       - RABBITMQ_DEFAULT_PASS=3eabURK4gqmtZRwzDKTxzBVV
@@ -38,6 +38,7 @@ services:
       - DEV_QUEU_HOST=rabbitmq
       - DEV_QUEUE_USER=user
       - DEV_QUEUE_PASSWORD=3eabURK4gqmtZRwzDKTxzBVV
+      - DEV_USE_AUTHENTICATION=false
     depends_on:
       - mongo
       - rabbitmq

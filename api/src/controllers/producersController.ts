@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
-import { Producer } from '../models';
-import { IProducersRepository } from "../repositories";
+import { Producer } from '../domain/models';
 import { AutoWired, Inject, Provides } from 'typescript-ioc';
-import { IQueueHelper } from '../queueutils';
+import { IProducersRepository } from '../infra/repositories';
+import { IQueueHelper } from '../infra/queueutils';
 
 @Provides(ProducersController)
 export class ProducersController {

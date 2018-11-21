@@ -1,9 +1,9 @@
 import { Router, Request, Response } from 'express';
-import { Person } from '../models';
-import { IPeopleRepository } from "../repositories";
 import { AutoWired, Inject, Provides } from 'typescript-ioc';
-import { IQueueHelper } from '../queueutils';
 import { ApiPath, ApiOperationGet, SwaggerDefinitionConstant, ApiOperationPost } from 'swagger-express-ts';
+import { Person } from '../domain/models';
+import { IPeopleRepository } from '../infra/repositories';
+import { IQueueHelper } from '../infra/queueutils';
 
 @Provides(PeopleController)
 @ApiPath({

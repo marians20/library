@@ -1,5 +1,5 @@
 import { IPeopleRepository } from './interfaces';
-import { Person } from '../models';
+import { Person } from '../../domain/models';
 import { Provides } from 'typescript-ioc';
 
 @Provides(IPeopleRepository)

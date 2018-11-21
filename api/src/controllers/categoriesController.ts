@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
-import { Category } from '../models';
-import { ICategoriesRepository } from "../repositories";
 import { AutoWired, Inject, Provides } from 'typescript-ioc';
-import { IQueueHelper } from '../queueutils';
+import { Category } from '../domain/models';
+import { ICategoriesRepository } from '../infra/repositories';
+import { IQueueHelper } from '../infra/queueutils';
 
 @Provides(CategoriesController)
 export class CategoriesController {

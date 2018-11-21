@@ -1,5 +1,5 @@
 import { IProductsRepository } from './interfaces';
-import { Product } from '../models';
+import { Product } from '../../domain/models';
 import { Provides } from 'typescript-ioc';
 
 @Provides(IProductsRepository)

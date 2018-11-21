@@ -1,5 +1,6 @@
-import { Container } from "typescript-ioc";
-import { IPeopleRepository, PeopleRepository } from "../repositories";
+import { Container } from 'typescript-ioc';
+import { IPeopleRepository, PeopleRepository } from '../infra/repositories';
+
 
 export class IocContainerConfig {
 

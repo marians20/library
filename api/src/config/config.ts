@@ -1,6 +1,8 @@
 const devConfig = {
     app: {
-        port: parseInt(process.env.DEV_APP_PORT || '8080')
+        port: parseInt(process.env.DEV_APP_PORT || '8080'),
+        secret: 'ccdf9fa8-03ba-4d4a-992e-111ff4ac2514',
+        use_authentication: process.env.DEV_USE_AUTHENTICATION || false
     },
     db: {
         host: process.env.DEV_DB_HOST || 'localhost',
